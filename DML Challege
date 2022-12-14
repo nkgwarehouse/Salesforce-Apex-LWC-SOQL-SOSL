@@ -1,0 +1,25 @@
+//Create new instance of account Object
+Account acc = new Account(Name='WingNut Films', Rating='Warm');
+insert acc;
+//Insert new Opportunity and associate it with account
+Opportunity opp = new Opportunity(Name='Lord of the Rings',StageName='Qualification', CloseDate=Date.today());
+opp.AccountId  ='0015i00000W6RUgAAN';
+insert opp;
+// retrive Wingnut films account
+//List<Account> accounts = [SELECT Id, Name FROM Account WHERE Name = 'WingNut Films'];
+ Account accounts = [SELECT Id, Name FROM Account WHERE Name = 'WingNut Films' LIMIT 1];
+accounts.name = 'New Line Cinema';
+update accounts;
+
+//Update opportunity satege to Stage Won
+Opportunity Opps = [SELECT Id, Name, StageName FROM Opportunity WHERE Name='Lord of the Rings' LIMIT 1];
+Opps.StageName='Stage Won';
+Update Opps;
+
+//Delete Opportunity
+Opportunity Opps = [SELECT Id, Name, StageName FROM Opportunity WHERE Name='Lord of the Rings' LIMIT 1];
+delete Opps;
+
+//Undelete Opportunity
+LIST<Opportunity> Opps = [SELECT Id, Name, StageName FROM Opportunity WHERE isDeleted=true ALL ROWS];
+undelete Opps;
